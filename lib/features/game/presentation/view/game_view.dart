@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flappy_game/config/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rive/rive.dart';
 
 import '../blocs/bloc/game_bloc.dart';
 import '../blocs/timer/timer_cubit.dart';
@@ -16,6 +17,7 @@ class TRexGame extends StatefulWidget {
 }
 
 class _TRexGameState extends State<TRexGame> {
+  late RiveAnimationController _controller;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -30,6 +32,9 @@ class _TRexGameState extends State<TRexGame> {
 
         if (!gameState.isJumping && gameState.gameStatus != GameStatus.lose && gameState.heroPosition == 0) {
           context.read<GameBloc>().add(Jump());
+          setState(() {
+            _controller = SimpleAnimation('Jump');
+          });
         }
       },
       child: Scaffold(
@@ -63,10 +68,14 @@ class _TRexGameState extends State<TRexGame> {
                       Positioned(
                         bottom: gameState.heroPosition,
                         left: 50,
-                        child: Image.asset(
-                          'assets/images/hero.png',
-                          height: 100,
-                          width: 100,
+                        child: Container(
+                          height: 110,
+                          width: 110,
+                          child: RiveAnimation.asset(
+                            'assets/animations/jump-man.riv',
+                            fit: BoxFit.fill,
+                            animations: const ['Run', 'Jump'],
+                          ),
                         ),
                       ),
                       ...gameState.obstaclePositions.map((position) {
