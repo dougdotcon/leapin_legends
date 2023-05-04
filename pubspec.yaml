@@ -39,6 +39,7 @@ dependencies:
   flutter_bloc: ^8.0.1
   equatable: ^2.0.3
   gap: ^2.0.0
+  rive: ^0.10.4
 
 dev_dependencies:
   flutter_test:
@@ -64,6 +65,7 @@ flutter:
   assets:
     - assets/
     - assets/images/
+    - assets/rive/
 
   # To add assets to your application, add an assets section, like this:
   # assets:

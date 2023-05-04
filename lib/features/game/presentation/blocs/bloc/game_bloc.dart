@@ -27,13 +27,13 @@ class GameBloc extends Bloc<GameEvent, GameState> {
 
   void _onUpdateHeroPosition(UpdateHeroPosition event, Emitter<GameState> emit) {
     if (state.isJumping) {
-      final updatedHeroPosition = state.heroPosition + 5;
+      final updatedHeroPosition = state.heroPosition + 2;
       emit(state.copyWith(heroPosition: updatedHeroPosition));
-      if (updatedHeroPosition >= 120) {
+      if (updatedHeroPosition >= 50) {
         emit(state.copyWith(isJumping: false));
       }
     } else if (state.heroPosition > 0) {
-      emit(state.copyWith(heroPosition: state.heroPosition - 5));
+      emit(state.copyWith(heroPosition: state.heroPosition - 2));
     }
   }
 
@@ -44,8 +44,8 @@ class GameBloc extends Bloc<GameEvent, GameState> {
 
     var updatedObstaclePositions = state.obstaclePositions.map((position) => position - 5).toList(growable: false);
 
-    if (state.obstaclePositions.isEmpty || state.obstaclePositions.last < 500) {
-      final position = math.Random().nextDouble() * 450 + 700;
+    if (state.obstaclePositions.isEmpty || state.obstaclePositions.last < 700) {
+      final position = math.Random().nextDouble() * 450 + 800;
       updatedObstaclePositions = [
         ...state.obstaclePositions,
         position,
@@ -56,7 +56,7 @@ class GameBloc extends Bloc<GameEvent, GameState> {
 
   void _onCheckCollision(CheckColission event, Emitter<GameState> emit) {
     for (final obstaclePosition in state.obstaclePositions) {
-      if (obstaclePosition < 50 && obstaclePosition + 40 > 20 && state.heroPosition + 20 < 50) {
+      if (obstaclePosition < 50 && obstaclePosition + 40 > 40 && state.heroPosition + 40 < 50) {
         emit(state.copyWith(gameStatus: GameStatus.lose));
       }
     }

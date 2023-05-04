@@ -1,7 +1,9 @@
 import 'dart:async';
+import 'dart:math';
 import 'package:flappy_game/config/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rive/rive.dart';
 
 import '../blocs/bloc/game_bloc.dart';
 import '../blocs/timer/timer_cubit.dart';
@@ -16,6 +18,7 @@ class TRexGame extends StatefulWidget {
 }
 
 class _TRexGameState extends State<TRexGame> {
+  late RiveAnimationController _controller = SimpleAnimation('');
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -30,6 +33,10 @@ class _TRexGameState extends State<TRexGame> {
 
         if (!gameState.isJumping && gameState.gameStatus != GameStatus.lose && gameState.heroPosition == 0) {
           context.read<GameBloc>().add(Jump());
+          _controller = SimpleAnimation('Jump');
+          Future.delayed(const Duration(milliseconds: 1000)).then((value) => {
+                _controller = SimpleAnimation('Run'),
+              });
         }
       },
       child: Scaffold(
@@ -58,46 +65,50 @@ class _TRexGameState extends State<TRexGame> {
                 return Container(
                   color: Colors.white,
                   child: Stack(
+                    alignment: Alignment.center,
                     children: [
-                      Positioned(bottom: 100, child: Text('result: ${gameState.result.toInt()}')),
                       Positioned(
-                        bottom: gameState.heroPosition,
+                        bottom: 0,
+                        child: Container(
+                          color: Colors.black,
+                          height: 205,
+                          width: MediaQuery.of(context).size.width,
+                        ),
+                      ),
+                      const RiveAnimation.asset(
+                        'assets/rive/background.riv',
+                      ),
+                      Positioned(
+                        bottom: 100,
+                        child: Text('result: ${gameState.result.toInt()}'),
+                      ),
+                      Positioned(
+                        bottom: gameState.heroPosition + 200,
                         left: 50,
-                        child: Image.asset(
-                          'assets/images/hero.png',
+                        child: SizedBox(
                           height: 100,
                           width: 100,
+                          child: RiveAnimation.asset(
+                            'assets/rive/hero.riv',
+                            controllers: [_controller],
+                            onInit: (_) => SimpleAnimation('Jump'),
+                          ),
                         ),
                       ),
                       ...gameState.obstaclePositions.map((position) {
                         return Positioned(
-                          bottom: 0,
+                          bottom: 200,
                           left: position,
-                          child: Image.asset(
-                            'assets/images/hero.png',
-                            height: 100,
-                            width: 100,
+                          child: const SizedBox(
+                            height: 50,
+                            width: 50,
+                            child: RiveAnimation.asset(
+                              'assets/rive/obstacle.riv',
+                            ),
                           ),
                         );
                       }),
-                      if (gameState.gameStatus == GameStatus.lose)
-                        Positioned.fill(
-                          child: Opacity(
-                            opacity: 0.5,
-                            child: Container(
-                              color: Colors.black,
-                              child: const Center(
-                                child: Text(
-                                  'GAME OVER',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 40,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
+                      if (gameState.gameStatus == GameStatus.lose) Container()
                     ],
                   ),
                 );
