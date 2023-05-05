@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'dart:math';
+import 'package:flappy_game/config/const.dart';
 import 'package:flappy_game/config/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,17 +8,18 @@ import 'package:rive/rive.dart';
 import '../blocs/bloc/game_bloc.dart';
 import '../blocs/timer/timer_cubit.dart';
 
-void main() => runApp(const TRexGame());
+void main() => runApp(const GameView());
 
-class TRexGame extends StatefulWidget {
-  const TRexGame({super.key});
+class GameView extends StatefulWidget {
+  const GameView({super.key});
 
   @override
-  State<StatefulWidget> createState() => _TRexGameState();
+  State<StatefulWidget> createState() => _GameViewState();
 }
 
-class _TRexGameState extends State<TRexGame> {
-  late RiveAnimationController _controller = SimpleAnimation('');
+class _GameViewState extends State<GameView> {
+  late RiveAnimationController _heroController = SimpleAnimation('');
+  late RiveAnimationController _groundController = SimpleAnimation('');
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -29,14 +30,12 @@ class _TRexGameState extends State<TRexGame> {
         if (timerState.status == TimerStatus.off) {
           context.read<TimerCubit>().start();
           context.read<GameBloc>().add(UpdateGameStatus(gameStatus: GameStatus.started));
+          _heroController = SimpleAnimation('Run', autoplay: true);
+          _groundController = SimpleAnimation('Run', autoplay: true);
         }
 
         if (!gameState.isJumping && gameState.gameStatus != GameStatus.lose && gameState.heroPosition == 0) {
           context.read<GameBloc>().add(Jump());
-          _controller = SimpleAnimation('Jump');
-          Future.delayed(const Duration(milliseconds: 1000)).then((value) => {
-                _controller = SimpleAnimation('Run'),
-              });
         }
       },
       child: Scaffold(
@@ -46,6 +45,11 @@ class _TRexGameState extends State<TRexGame> {
               listener: (context, gameStateListener) {
                 if (gameStateListener.gameStatus == GameStatus.lose) {
                   context.read<TimerCubit>().stop();
+                  _heroController = SimpleAnimation('', autoplay: false);
+                  _groundController = SimpleAnimation('', autoplay: false);
+                }
+                if (timerState.time == 5000 || timerState.time == 10000 || timerState.time == 20000) {
+                  context.read<GameBloc>().add(ChangeDifficulity());
                 }
               },
               listenWhen: (previous, current) {
@@ -70,9 +74,20 @@ class _TRexGameState extends State<TRexGame> {
                       Positioned(
                         bottom: 0,
                         child: Container(
-                          color: Colors.black,
+                          color: darkGray,
                           height: 205,
                           width: MediaQuery.of(context).size.width,
+                        ),
+                      ),
+                      Positioned(
+                        bottom: 145,
+                        child: SizedBox(
+                          height: 87,
+                          width: MediaQuery.of(context).size.width,
+                          child: RiveAnimation.asset(
+                            'assets/rive/ground.riv',
+                            controllers: [_groundController],
+                          ),
                         ),
                       ),
                       const RiveAnimation.asset(
@@ -90,7 +105,7 @@ class _TRexGameState extends State<TRexGame> {
                           width: 100,
                           child: RiveAnimation.asset(
                             'assets/rive/hero.riv',
-                            controllers: [_controller],
+                            controllers: [_heroController],
                             onInit: (_) => SimpleAnimation('Jump'),
                           ),
                         ),
@@ -100,8 +115,8 @@ class _TRexGameState extends State<TRexGame> {
                           bottom: 200,
                           left: position,
                           child: const SizedBox(
-                            height: 50,
-                            width: 50,
+                            height: 60,
+                            width: 60,
                             child: RiveAnimation.asset(
                               'assets/rive/obstacle.riv',
                             ),

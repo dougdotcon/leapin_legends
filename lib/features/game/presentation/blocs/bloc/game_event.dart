@@ -19,3 +19,5 @@ class UpdateGameStatus extends GameEvent {
 class Jump extends GameEvent {}
 
 class InitNewGame extends GameEvent {}
+
+class ChangeDifficulity extends GameEvent {}
