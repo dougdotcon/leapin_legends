@@ -5,6 +5,8 @@ import 'package:equatable/equatable.dart';
 
 import 'package:flappy_game/config/enums.dart';
 
+import '../../../data/repository/game_repository_impl.dart';
+
 part 'game_event.dart';
 part 'game_state.dart';
 
@@ -17,6 +19,8 @@ class GameBloc extends Bloc<GameEvent, GameState> {
           obstaclePositions: [],
           result: 0,
           difficulity: Difficulity.extreme,
+          recordStatus: RecordStatus.notBroken,
+          record: 0,
         )) {
     on<UpdateHeroPosition>(_onUpdateHeroPosition);
     on<UpdateObstaclePositions>(_onUpdateObstaclePositions);
@@ -25,13 +29,16 @@ class GameBloc extends Bloc<GameEvent, GameState> {
     on<UpdateGameStatus>(_onUpdateGameStatus);
     on<InitNewGame>(_onInitNewGame);
     on<ChangeDifficulity>(_changeDifficulity);
+    on<UpdateUserRecord>(_updateUserRecord);
+    on<GetLeaderBoard>(_getLederboard);
+    on<InitGame>(_initGame);
   }
 
   void _onUpdateHeroPosition(UpdateHeroPosition event, Emitter<GameState> emit) {
     if (state.isJumping) {
       final updatedHeroPosition = state.heroPosition + 2;
       emit(state.copyWith(heroPosition: updatedHeroPosition));
-      if (updatedHeroPosition >= 60) {
+      if (updatedHeroPosition >= 50) {
         emit(state.copyWith(isJumping: false));
       }
     } else if (state.heroPosition > 0) {
@@ -62,7 +69,7 @@ class GameBloc extends Bloc<GameEvent, GameState> {
     }
 
     if (state.obstaclePositions.isEmpty || state.obstaclePositions.last < 400) {
-      final position = distance / 1.55 + math.Random().nextDouble() * distance / 2;
+      final position = distance / 1.5 + math.Random().nextDouble() * distance / 2;
       updatedObstaclePositions = [
         ...state.obstaclePositions,
         position,
@@ -92,6 +99,18 @@ class GameBloc extends Bloc<GameEvent, GameState> {
     emit(state.copyWith(obstaclePositions: [], result: 0));
   }
 
+  void _getLederboard(GetLeaderBoard event, Emitter<GameState> emit) {}
+
+  void _updateUserRecord(UpdateUserRecord event, Emitter<GameState> emit) async {
+    var newRecord = await GameRepositoryImpl().updateUserRecord(event.record);
+
+    if (newRecord.statusCode == 200) {
+      emit(state.copyWith(recordStatus: RecordStatus.newRecord, record: event.record));
+      return;
+    }
+    emit(state.copyWith(recordStatus: RecordStatus.notBroken));
+  }
+
   void _changeDifficulity(ChangeDifficulity event, Emitter<GameState> emit) {
     var difficulity = state.difficulity;
     switch (difficulity) {
@@ -103,7 +122,11 @@ class GameBloc extends Bloc<GameEvent, GameState> {
         break;
       default:
     }
-    print(difficulity);
     emit(state.copyWith(difficulity: difficulity));
+  }
+
+  void _initGame(InitGame event, Emitter<GameState> emit) async {
+    var actualRecord = await GameRepositoryImpl().initGame();
+    emit(state.copyWith(record: actualRecord));
   }
 }

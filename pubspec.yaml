@@ -37,9 +37,16 @@ dependencies:
   google_fonts: ^3.0.1
   bloc: ^8.0.3
   flutter_bloc: ^8.0.1
+  flutter_screenutil: ^5.7.0
+  animated_styled_widget: ^0.4.6
   equatable: ^2.0.3
+  shared_preferences: ^2.1.0
   gap: ^2.0.0
+  carousel_slider: ^4.2.1
   rive: ^0.10.4
+  vibration: ^1.7.6
+  unique_identifier: ^0.3.0
+  flutter_animate: ^4.1.1+1
 
 dev_dependencies:
   flutter_test:

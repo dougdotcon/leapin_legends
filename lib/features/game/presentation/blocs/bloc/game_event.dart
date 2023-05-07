@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'game_bloc.dart';
 
 abstract class GameEvent {}
@@ -18,6 +17,18 @@ class UpdateGameStatus extends GameEvent {
 
 class Jump extends GameEvent {}
 
+class InitGame extends GameEvent {}
+
 class InitNewGame extends GameEvent {}
 
 class ChangeDifficulity extends GameEvent {}
+
+class UpdateUserRecord extends GameEvent {
+  final int record;
+
+  UpdateUserRecord({
+    required this.record,
+  });
+}
+
+class GetLeaderBoard extends GameEvent {}
