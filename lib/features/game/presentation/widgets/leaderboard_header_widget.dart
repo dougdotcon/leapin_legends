@@ -53,7 +53,7 @@ class LeaderboardHeader extends StatelessWidget {
             Gap(20.w),
             Text(
               context.read<UserBloc>().state.user!.name,
-              style: Theme.of(context).textTheme.labelSmall,
+              style: Theme.of(context).textTheme.displayMedium,
             ),
           ],
         ),

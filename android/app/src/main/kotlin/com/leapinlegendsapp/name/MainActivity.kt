@@ -1,4 +1,4 @@
-package com.example.flappy_game
+package com.leapinlegendsapp.name
 
 import io.flutter.embedding.android.FlutterActivity
 

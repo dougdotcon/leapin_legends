@@ -3,6 +3,7 @@ import 'package:flappy_game/features/menu/data/entities/apiresponse.dart';
 // ignore: depend_on_referenced_packages
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:vibration/vibration.dart';
 
 import '../../../../config/api_constants.dart';
 import '../../repository/game_repository.dart';
@@ -46,5 +47,10 @@ class GameRepositoryImpl extends GameRepository {
     final int? record = prefs.getInt('record');
 
     return record ?? 0;
+  }
+
+  @override
+  void vibrate() {
+    Vibration.vibrate(amplitude: 150, duration: 100);
   }
 }

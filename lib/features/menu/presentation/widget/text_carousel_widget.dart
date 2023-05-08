@@ -16,7 +16,7 @@ class _TextCarouselState extends State<TextCarousel> {
   List<Map<String, Object>> appDescription = [
     {'id': 0, 'text': 'The object of the game is to get as many points as possible by avoiding monsters.'},
     {'id': 1, 'text': 'In order to jump, the player has to touch the screen of his mobile device.'},
-    {'id': 2, 'text': 'However, he must be careful not to jump over the monsters too close.'},
+    {'id': 2, 'text': 'You have to be careful not to get too close to the monsters!'},
   ];
 
   @override

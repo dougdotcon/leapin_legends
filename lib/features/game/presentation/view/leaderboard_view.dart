@@ -51,11 +51,11 @@ class _LeaderboardViewState extends State<LeaderboardView> {
                             children: [
                               Container(
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(25),
-                                  color: index + 1 < 3 ? gold : Colors.white,
+                                  shape: BoxShape.circle,
+                                  color: index + 1 < 4 ? gold : Colors.white,
                                 ),
-                                height: 40.h,
-                                width: 40.w,
+                                height: 40,
+                                width: 40,
                                 child: Center(
                                     child: Text(
                                   '${index + 1}',

@@ -91,6 +91,7 @@ class GameBloc extends Bloc<GameEvent, GameState> {
   void _onJump(Jump event, Emitter<GameState> emit) {
     emit(state.copyWith(isJumping: true));
     add(UpdateHeroPosition());
+    GameRepositoryImpl().vibrate();
   }
 
   void _onUpdateGameStatus(UpdateGameStatus event, Emitter<GameState> emit) {
