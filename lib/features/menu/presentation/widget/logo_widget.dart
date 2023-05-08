@@ -1,10 +1,4 @@
-import 'dart:async';
-import 'dart:math';
-
-import 'package:flappy_game/features/menu/presentation/widget/logo_text_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:rive/rive.dart';
 
 import '../../../../config/const.dart';

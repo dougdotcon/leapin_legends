@@ -31,4 +31,4 @@ class UpdateUserRecord extends GameEvent {
   });
 }
 
-class GetLeaderBoard extends GameEvent {}
+class GetTimeLeaderboard extends GameEvent {}

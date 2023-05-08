@@ -5,6 +5,7 @@ import 'package:equatable/equatable.dart';
 
 import 'package:flappy_game/config/enums.dart';
 
+import '../../../data/entities/leaderboard.dart';
 import '../../../data/repository/game_repository_impl.dart';
 
 part 'game_event.dart';
@@ -17,8 +18,9 @@ class GameBloc extends Bloc<GameEvent, GameState> {
           heroPosition: 0,
           isJumping: false,
           obstaclePositions: [],
+          leaderboard: [],
           result: 0,
-          difficulity: Difficulity.extreme,
+          difficulity: Difficulity.easy,
           recordStatus: RecordStatus.notBroken,
           record: 0,
         )) {
@@ -30,7 +32,7 @@ class GameBloc extends Bloc<GameEvent, GameState> {
     on<InitNewGame>(_onInitNewGame);
     on<ChangeDifficulity>(_changeDifficulity);
     on<UpdateUserRecord>(_updateUserRecord);
-    on<GetLeaderBoard>(_getLederboard);
+    on<GetTimeLeaderboard>(_getTimeLederboard);
     on<InitGame>(_initGame);
   }
 
@@ -99,7 +101,14 @@ class GameBloc extends Bloc<GameEvent, GameState> {
     emit(state.copyWith(obstaclePositions: [], result: 0));
   }
 
-  void _getLederboard(GetLeaderBoard event, Emitter<GameState> emit) {}
+  Future<void> _getTimeLederboard(GetTimeLeaderboard event, Emitter<GameState> emit) async {
+    List<Leaderboard> leaderboard = await GameRepositoryImpl().getTimeLeaderboard();
+    if (leaderboard.isNotEmpty) {
+      emit(state.copyWith(leaderboard: leaderboard));
+    } else {
+      emit(state.copyWith(leaderboard: []));
+    }
+  }
 
   void _updateUserRecord(UpdateUserRecord event, Emitter<GameState> emit) async {
     var newRecord = await GameRepositoryImpl().updateUserRecord(event.record);

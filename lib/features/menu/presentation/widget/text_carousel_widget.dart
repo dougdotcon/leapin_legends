@@ -14,9 +14,9 @@ class TextCarousel extends StatefulWidget {
 class _TextCarouselState extends State<TextCarousel> {
   int actualSlide = 0;
   List<Map<String, Object>> appDescription = [
-    {'id': 0, 'text': 'Memory Game is a classic game of memory that challenges players to uncover matching pairs.'},
-    {'id': 1, 'text': 'Players must use their memory skills to flip over tiles and uncover pairs of matching tiles.'},
-    {'id': 2, 'text': 'Quickly uncover all of the tiles and check your rank in the leaderboard.'},
+    {'id': 0, 'text': 'The object of the game is to get as many points as possible by avoiding monsters.'},
+    {'id': 1, 'text': 'In order to jump, the player has to touch the screen of his mobile device.'},
+    {'id': 2, 'text': 'However, he must be careful not to jump over the monsters too close.'},
   ];
 
   @override

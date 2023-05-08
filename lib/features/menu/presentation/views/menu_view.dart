@@ -1,5 +1,4 @@
 import 'package:flappy_game/config/const.dart';
-import 'package:flappy_game/features/game/presentation/blocs/bloc/game_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -24,8 +23,8 @@ class _MenuViewState extends State<MenuView> {
   TextEditingController userNameController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    // print(MediaQuery.of(context).size.width);
-    // print(MediaQuery.of(context).size.height);
+    print(MediaQuery.of(context).size.width);
+    print(MediaQuery.of(context).size.height);
     return Scaffold(
       backgroundColor: darkGray,
       body: LayoutBuilder(
@@ -77,7 +76,8 @@ class _MenuViewState extends State<MenuView> {
                                                   Expanded(
                                                     flex: 2,
                                                     child: CustomButton(
-                                                      color: Colors.white,
+                                                      textColor: darkGray,
+                                                      backgroundColor: Colors.white,
                                                       icon: Icons.person_add_alt_1_rounded,
                                                       text: 'Add user',
                                                       onPressed: () {
@@ -98,7 +98,8 @@ class _MenuViewState extends State<MenuView> {
                                             mainAxisAlignment: MainAxisAlignment.end,
                                             children: [
                                               CustomButton(
-                                                color: darkGray,
+                                                textColor: darkGray,
+                                                backgroundColor: Colors.white,
                                                 icon: Icons.play_arrow_rounded,
                                                 text: 'Start game',
                                                 onPressed: () {

@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flappy_game/config/route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,6 +15,7 @@ import '../blocs/bloc/game_bloc.dart';
 import '../blocs/timer/timer_cubit.dart';
 import '../widgets/game_header_widget.dart';
 import '../widgets/game_widget.dart';
+import '../widgets/info_dialog_widget.dart';
 import '../widgets/result_widget.dart';
 
 void main() => runApp(const GameView());
@@ -87,7 +89,7 @@ class _GameViewState extends State<GameView> {
                       children: [
                         Gap(30.h),
                         GameHeader(
-                          cupTap: () {},
+                          cupTap: () => Navigator.pushNamed(context, leaderboardView),
                           infoTap: () => infoDialog(context),
                         ),
                         Gap(40.h),
@@ -117,29 +119,6 @@ class _GameViewState extends State<GameView> {
           ),
         ),
       ),
-    );
-  }
-
-  Future<void> infoDialog(BuildContext context) async {
-    return showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(32),
-            ),
-          ),
-          actions: [
-            Container(
-              height: 300,
-              child: Column(
-                children: [],
-              ),
-            )
-          ],
-        );
-      },
     );
   }
 

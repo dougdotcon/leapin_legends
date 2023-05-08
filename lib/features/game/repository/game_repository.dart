@@ -1,7 +1,7 @@
-import '../../menu/data/entities/user.dart';
+import '../data/entities/leaderboard.dart';
 
 abstract class GameRepository {
   Future<void> updateUserRecord(int record);
-  Future<List<User>> getTimeLeaderboard();
+  Future<List<Leaderboard>> getTimeLeaderboard();
   Future<int> initGame();
 }

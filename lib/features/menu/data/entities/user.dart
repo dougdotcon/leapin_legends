@@ -1,10 +1,5 @@
 import 'dart:convert';
 
-List<User> leaderboardFromJson(String str) {
-  final jsonData = json.decode(str);
-  return List<User>.from(jsonData.map((x) => User.fromJson(x)));
-}
-
 User userFromJson(String str) {
   final jsonData = json.decode(str);
   return User.fromJson(jsonData);

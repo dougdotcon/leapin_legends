@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'game_bloc.dart';
 
 class GameState extends Equatable {
@@ -10,6 +9,7 @@ class GameState extends Equatable {
   final Difficulity difficulity;
   final RecordStatus recordStatus;
   final int record;
+  final List<Leaderboard> leaderboard;
 
   const GameState({
     required this.heroPosition,
@@ -20,6 +20,7 @@ class GameState extends Equatable {
     required this.difficulity,
     required this.recordStatus,
     required this.record,
+    required this.leaderboard,
   });
 
   @override
@@ -32,6 +33,7 @@ class GameState extends Equatable {
         difficulity,
         recordStatus,
         record,
+        leaderboard,
       ];
 
   GameState copyWith({
@@ -43,6 +45,7 @@ class GameState extends Equatable {
     Difficulity? difficulity,
     RecordStatus? recordStatus,
     int? record,
+    List<Leaderboard>? leaderboard,
   }) {
     return GameState(
       heroPosition: heroPosition ?? this.heroPosition,
@@ -53,6 +56,7 @@ class GameState extends Equatable {
       difficulity: difficulity ?? this.difficulity,
       recordStatus: recordStatus ?? this.recordStatus,
       record: record ?? this.record,
+      leaderboard: leaderboard ?? this.leaderboard,
     );
   }
 }

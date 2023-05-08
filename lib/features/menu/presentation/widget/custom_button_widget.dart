@@ -1,4 +1,3 @@
-import 'package:flappy_game/config/const.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -6,14 +5,16 @@ class CustomButton extends StatelessWidget {
   final Function()? onPressed;
   final IconData icon;
   final String text;
-  final Color color;
+  final Color backgroundColor;
+  final Color textColor;
 
   const CustomButton({
     Key? key,
     required this.onPressed,
     required this.icon,
     required this.text,
-    required this.color,
+    required this.backgroundColor,
+    required this.textColor,
   }) : super(key: key);
 
   @override
@@ -23,18 +24,18 @@ class CustomButton extends StatelessWidget {
       width: double.infinity,
       child: ElevatedButton.icon(
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.white.withOpacity(0.08),
+          backgroundColor: backgroundColor,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(17)),
         ),
         onPressed: onPressed,
         icon: Icon(
           icon,
           size: 18,
-          color: Colors.white,
+          color: textColor,
         ),
         label: Text(
           text,
-          style: Theme.of(context).textTheme.displayLarge!.copyWith(color: Colors.white),
+          style: Theme.of(context).textTheme.displayLarge!.copyWith(color: textColor),
         ),
       ),
     );

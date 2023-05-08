@@ -1,9 +1,10 @@
+import 'package:flappy_game/features/game/data/entities/leaderboard.dart';
 import 'package:flappy_game/features/menu/data/entities/apiresponse.dart';
+// ignore: depend_on_referenced_packages
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../config/api_constants.dart';
-import '../../../menu/data/entities/user.dart';
 import '../../repository/game_repository.dart';
 
 class GameRepositoryImpl extends GameRepository {
@@ -29,7 +30,7 @@ class GameRepositoryImpl extends GameRepository {
   }
 
   @override
-  Future<List<User>> getTimeLeaderboard() async {
+  Future<List<Leaderboard>> getTimeLeaderboard() async {
     var url = Uri.parse(baseUrl + timeLeaderboard);
 
     var leaderboard = await http.get(url, headers: {

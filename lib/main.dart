@@ -78,7 +78,7 @@ class MyApp extends StatelessWidget {
                 ),
               ),
             ),
-            initialRoute: route.menu,
+            initialRoute: route.menuView,
             onGenerateRoute: route.controller,
           ),
         );
