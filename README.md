@@ -1,6 +1,7 @@
 # Leapin Legends
 
 Simple game using rive animation
+App available in [Google Play Store](https://play.google.com/store/apps/details?id=com.leapinlegendsapp.name).
 
 ## Application created for development purposes
 
@@ -15,4 +16,3 @@ In the game, the player controls a character who can jump over monsters. Monster
 ![alt text](https://rscode.site/files/leapinlegends/55.png)
 ![alt text](https://rscode.site/files/leapinlegends/66.png)
 
-App available in [Google Play Store]([https://pages.github.com/](https://play.google.com/store/apps/details?id=com.leapinlegendsapp.name)).
