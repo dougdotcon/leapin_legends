@@ -1,16 +1,18 @@
-# flappy_game
+# Leapin Legends
 
-A new Flutter project.
+Simple game using rive animation
 
-## Getting Started
+## Application created for development purposes
 
-This project is a starting point for a Flutter application.
+The game is called "Leapin legends" and the goal is to jump over the monsters that appear on the screen. The game has a global ranking system that allows players to compete with other players from around the world.
 
-A few resources to get you started if this is your first Flutter project:
+In the game, the player controls a character who can jump over monsters. Monsters spawning randomly, the player must use their jumps appropriately to add their hits. If the player is hit by a monster, the game is over.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+![alt text](https://rscode.site/files/leapinlegends/11.png)
+![alt text](https://rscode.site/files/leapinlegends/22.png)
+![alt text](https://rscode.site/files/leapinlegends/33.png)
+![alt text](https://rscode.site/files/leapinlegends/44.png)
+![alt text](https://rscode.site/files/leapinlegends/55.png)
+![alt text](https://rscode.site/files/leapinlegends/66.png)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+App available in [Google Play Store]([https://pages.github.com/](https://play.google.com/store/apps/details?id=com.leapinlegendsapp.name)).
