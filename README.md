@@ -9,10 +9,9 @@ The game is called "Leapin legends" and the goal is to jump over the monsters th
 
 In the game, the player controls a character who can jump over monsters. Monsters spawning randomly, the player must use their jumps appropriately to add their hits. If the player is hit by a monster, the game is over.
 
+![alt text](https://rscode.site/files/leapinlegends/66.png)
 ![alt text](https://rscode.site/files/leapinlegends/11.png)
 ![alt text](https://rscode.site/files/leapinlegends/22.png)
 ![alt text](https://rscode.site/files/leapinlegends/33.png)
 ![alt text](https://rscode.site/files/leapinlegends/44.png)
 ![alt text](https://rscode.site/files/leapinlegends/55.png)
-![alt text](https://rscode.site/files/leapinlegends/66.png)
-
